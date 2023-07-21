@@ -8,14 +8,17 @@ class Password {
       return false;
     }
 
+    
     if (!password.contains(RegExp(r'[A-Z]'))) {
       return false;
     }
 
+    
     if (!password.contains(RegExp(r'[a-z]'))) {
       return false;
     }
 
+    
     if (!password.contains(RegExp(r'[0-9]'))) {
       return false;
     }
