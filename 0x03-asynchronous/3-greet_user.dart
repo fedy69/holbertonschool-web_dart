@@ -4,12 +4,12 @@ import 'dart:convert';
 
 Future<String> greetUser() async {
   try {
-    String userData = await fetchUserData();
-    Map<String, dynamic> userDataMap = json.decode(userData);
-    String username = userDataMap["username"];
-    return "Hello $username.";
-  } catch (error) {
-    return "error caught: $error";
+    final userData = await fetchUserData();
+    final data = json.decode(userData);
+    return "Hello ${data['username']}";
+  } catch (e) {
+    print('error caught: $e');
+    return "";
   }
 }
 
@@ -23,6 +23,10 @@ Future<String> loginUser() async {
       return "Wrong credentials";
     }
   } catch (e) {
-    return "error caugth $e";
+    return "error caught $e";
   }
+}
+
+main() async {
+  print(await loginUser());
 }
