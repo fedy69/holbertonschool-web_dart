@@ -15,14 +15,14 @@ Future<String> greetUser() async {
 
 Future<String> loginUser() async {
   try {
-    bool isValidUser = await checkCredentials();
-    print("There is a user: $isValidUser");
-    if (isValidUser) {
+    if (await checkCredentials()) {
+      print("There is a user: true");
       return await greetUser();
     } else {
+      print("There is a user: false");
       return "Wrong credentials";
     }
-  } catch (error) {
-    return "error caught: $error";
+  } catch (e) {
+    return "error caugth $e";
   }
 }
