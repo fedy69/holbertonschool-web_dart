@@ -1,20 +1,21 @@
 import "4-util.dart";
-import "dart:convert";
+import 'dart:async';
+import 'package:flutter/material.dart';
 
-Future<double> calculateTotal() async {
-  try {
-    final user = await fetchUserData();
-    final id = json.decode(user)["id"];
-    final products = await fetchUserOrders(id);
+Future<int> calculateTotal(int userId) async {
+  var user = await fetchUserData(userId);
+  var orders = await fetchUserOrders(userId);
+  int totalPrice = 0;
 
-    double totalPrice = 0.0;
-    for (String product in json.decode(products)) {
-      final price = await fetchProductPrice(product);
-      totalPrice += json.decode(price);
+  for (var order in orders) {
+    var productName = order['productName'];
+    try {
+      var productPrice = await fetchProductPrice(productName);
+      totalPrice += productPrice;
+    } catch (e) {
+      return -1;
     }
-
-    return totalPrice;
-  } catch (e) {
-    return -1;
   }
+
+  return totalPrice;
 }
