@@ -3,7 +3,6 @@ Future<int> fetchUsersCount() => Future.delayed(
       () => 19,
 );
 
- usersCount() async {
-  int count = await fetchUsersCount();
-  print(count);
+usersCount() async {
+  print(await fetchUsersCount());
 }
