@@ -1,9 +1,10 @@
-import 'dart:io';
-
 void main(List<String> args) {
-    var arg = int.parse(args[0]);
-    stdout.write('${arg} ');
-    if(arg > 0) { print('is positive'); }
-    else if(arg == 0) { print('is zero'); }
-    else print('is negative');
+    var n = int.parse(args[0]);
+    if (n == 0) {
+        print('${n} is zero');
+    } else if (n > 0) {
+        print('${n} is positive');
+    } else {
+        print('${n} is negative');
+    }
 }

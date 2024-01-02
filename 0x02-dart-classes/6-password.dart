@@ -1,45 +1,21 @@
-import '6-password.dart';
+class Password {
+    String user_password = "";
 
-class User {
-  int id;
-  String name;
-  int age;
-  double height;
-  Password _userPassword;
+    Password({required String password}) : user_password = password;
 
-  User({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.height,
-    String? userPassword,
-  }) : _userPassword = Password(userPassword ?? "");
+    String get password => user_password;
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? "",
-      age: json['age'] ?? 0,
-      height: json['height'] ?? 0.0,
-      userPassword: json['user_password'],
-    );
-  }
+    set password(String password) {
+        this.user_password = password;
+    }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'age': age,
-      'height': height,
-      'user_password': _userPassword.value,
-    };
-  }
-
-  @override
-  String toString() => 'User(id: $id, name: $name, age: $age, height: $height, Password: ${_userPassword.isValid()})';
-
-  set userPassword(String newPassword) {
-    _userPassword.value = newPassword ?? "";
-    print("Password is valid: ${_userPassword.isValid()}");
-  }
+    bool isValid(userJson) {
+        return (password.length >= 8 && password.length <= 15) &&
+            password.contains(RegExp(r'[A-Z]')) &&
+            password.contains(RegExp(r'[a-z]')) &&
+            password.contains(RegExp(r'[0-9]'));
+}
+     toString() {
+        return "Your Password is: ${this.password}";
+     }
 }

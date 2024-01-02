@@ -1,21 +1,23 @@
-import 'dart:convert';
 import '4-util.dart';
+import 'dart:convert';
+
 
 Future<double> calculateTotal() async {
-  try {
-    final userData = await fetchUserData();
-    final userId = json.decode(userData)['id'];
-
-    final userOrdersData = await fetchUserOrders(userId);
-    final userOrders = json.decode(userOrdersData).cast<String>();
-
-    final totalPrice = await Future<double>.value(userOrders.fold<double>(0, (total, order) async {
-      final productPrice = await json.decode(await fetchProductPrice(order)) as double;
-      return total + productPrice;
-    }));
-
-    return totalPrice;
-  } catch (error) {
-    return -1;
-  }
+    try {
+    return fetchUserData().then((data) {
+        String id = json.decode(data)['id'];
+        return fetchUserOrders(id).then((orders) async {
+            double total = 0.0;
+            for (var order in json.decode(orders)) {
+                await fetchProductPrice(order).then((price) {
+                    total += json.decode(price);
+                });
+            }
+            return total;
+        });
+    });
+    } catch (err) {
+        print('error caught: $err');
+        return -1;  
+    }  
 }

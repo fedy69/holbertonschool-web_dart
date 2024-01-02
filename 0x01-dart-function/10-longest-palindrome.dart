@@ -1,31 +1,33 @@
-String? longestPalindrome(String s) {
-  bool isPalindrome(int start, int end) {
-    while (start < end) {
-      if (s[start] != s[end]) {
+bool isPalindrome(String s) {
+    if (s == null || s.length == 0) {
+        return true;
+    }
+    if (s.length <= 2) {
         return false;
-      }
-      start++;
-      end--;
+    }
+    int left = 0;
+    int right = s.length - 1;
+    while (left < right) {
+        if (s[left] != s[right]) {
+        return false;
+        }
+        left++;
+        right--;
     }
     return true;
-  }
+}
 
-  if (s.length < 3) {
-    return null;
-  }
-
+String longestPalindrome(String s) {
+  if (s.length < 3) return 'none';
   String longest = '';
-
+  String current = '';
   for (int i = 0; i < s.length; i++) {
-    for (int j = i + 2; j <= s.length; j++) {
-      if (isPalindrome(i, j - 1)) {
-        String substring = s.substring(i, j);
-        if (substring.length > longest.length) {
-          longest = substring;
-        }
+    for (int j = i; j < s.length; j++) {
+      current = s.substring(i, j + 1);
+      if (isPalindrome(current) && current.length > longest.length) {
+        longest = current;
       }
     }
   }
-
-  return longest.isNotEmpty ? longest : null;
+  return longest != '' ? longest : 'none';
 }

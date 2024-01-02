@@ -1,4 +1,6 @@
-double calculateArea(double height, double base) {
-  double area = 0.5 * height * base;
-  return double.parse(area.toStringAsFixed(2));
+double calculateArea(double width, double height) {
+  var roundedArea = (width * height)/2;
+  var roundedString = roundedArea.toStringAsFixed(2);
+    var area = double.parse(roundedString);
+    return area;
 }
