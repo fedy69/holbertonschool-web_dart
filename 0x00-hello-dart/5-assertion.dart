@@ -1,10 +1,10 @@
-//import 'package:args/args.dart';
 void main(List<String> args) {
-  /*
-  Write Your code below 
-   */   
-   var score = double.parse(args[0]);
-   //var score = parser.parse(args)[0];
-   assert(score >= 80, 'The score must be bigger or equal to 80');
-   print('You Passed'); 
+  if (args.isNotEmpty) {
+    var score = double.tryParse(args[0]);
+
+    if (score != null && score >= 80) {
+      print('You Passed');
+    } else {
+      print('The score must be a valid number and greater or equal to 80');
+    }
 }

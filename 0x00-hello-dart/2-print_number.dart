@@ -1,4 +1,4 @@
 void main() {
-  var n = 98;
-  print('${n} Battery street\n');
+  var num_a = 98;
+  print('${num_a} Battery street\n');
 }

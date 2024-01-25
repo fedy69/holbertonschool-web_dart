@@ -3,14 +3,12 @@ class Password {
 
   Password(String value) : _value = value;
 
-  bool isValid() {
-    return _value.length >= 8 && _value.contains(RegExp(r'[a-zA-Z]')) && _value.contains(RegExp(r'[0-9]'));
-  }
+  bool get isValid => _value.length >= 8 && _value.contains(RegExp(r'[a-zA-Z]')) && _value.contains(RegExp(r'[0-9]'));
 
-  String getValue() => _value;
+  String get value => _value;
 
-  set value(String newValue) {
-    _value = newValue ?? ""; // Null check using null-aware operator
-  }
+  set value(String newValue) => _value = newValue ?? "";
+
+  @override
+  String toString() => 'Password $_value';
 }
-
